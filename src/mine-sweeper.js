@@ -27,17 +27,19 @@ function minesweeper(matrix) {
   let res = [];
   for (let i = 0; i < matrix.length; i++) {
     res.push([]);
+    
     for (let j = 0; j < matrix[i].length; j++) {
       res[i].push(0);
-      if ( i !== 0) {
+
+      if (matrix[i - 1]) {
         res[i][j] += (matrix[i - 1][j - 1] ? 1 : 0) + (matrix[i - 1][j] ? 1 : 0) + (matrix[i - 1][j + 1] ? 1 : 0);
       }
 
-      if (i !== matrix.length - 1) {
+      res[i][j] += (matrix[i][j - 1] ? 1 : 0) + (matrix[i][j + 1] ? 1 : 0);
+
+      if (matrix[i + 1]) {
         res[i][j] += (matrix[i + 1][j - 1] ? 1 : 0) + (matrix[i + 1][j] ? 1 : 0) + (matrix[i + 1][j + 1] ? 1 : 0);
       }
-
-      res[i][j] += (matrix[i][j - 1] ? 1 : 0) + (matrix[i][j + 1] ? 1 : 0);
     }
   }
   return res;
